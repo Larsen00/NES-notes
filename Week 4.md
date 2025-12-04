@@ -2929,3 +2929,24 @@ D. Convert floating-point numbers into fixed-point form
 ---
 
 If you want, I can generate **more MCQs**, **short-answer questions**, or **exam-style problems**.
+
+Here are the answers:
+
+---
+
+## **MCQ Answers**
+
+1. **D** – Full desktop-grade multitasking and GUI support
+    
+2. **B** – It prevents the CPU from sleeping while waiting
+    
+3. **B** – 512 seconds
+    
+4. **C** – `REG = REG & ~(1 << 4)`
+    
+5. **B** – Avoid race conditions by giving exclusive access to a resource
+    
+
+---
+
+If you'd like, I can generate more questions or create a full practice exam.
