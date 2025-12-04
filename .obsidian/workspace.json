@@ -14,36 +14,31 @@
               "type": "pdf",
               "state": {
                 "file": "All_slides_nes.pdf",
-                "page": 1,
-                "left": -29,
-                "top": 600,
-                "zoom": 0.3082351158073182
+                "page": 423,
+                "left": -26,
+                "top": 179,
+                "zoom": 0.58125
               },
               "icon": "lucide-file-text",
               "title": "All_slides_nes"
             }
-          }
-        ]
-      },
-      {
-        "id": "025e594e0e6f7e30",
-        "type": "tabs",
-        "children": [
+          },
           {
-            "id": "14674a6c9a149201",
+            "id": "01cb433a4e6f207f",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Week 2.md",
+                "file": "Week 12.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Week 2"
+              "title": "Week 12"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -96,8 +91,7 @@
               "title": "Bookmarks"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -117,7 +111,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Week 2.md",
+                "file": "Week 12.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -127,7 +121,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Week 2"
+              "title": "Backlinks for Week 12"
             }
           },
           {
@@ -208,9 +202,13 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "14674a6c9a149201",
+  "active": "01cb433a4e6f207f",
   "lastOpenFiles": [
     "Promt.md",
+    "All slides seprate/w12-industrial-networks.pdf",
+    "All_slides_nes.pdf",
+    "Week 12.md",
+    "Week 2.md",
     "All slides seprate/w9-time-sync.pdf",
     "All slides seprate/w8-wireless-nes.pdf",
     "All slides seprate/w5-serial-communication_251006_184819.pdf",
@@ -218,11 +216,8 @@
     "All slides seprate/w3-mcu-io - Copy.pdf",
     "All slides seprate/w2-electronics-basics_250911_151424.pdf",
     "All slides seprate/w1a-nes-intro.pdf",
-    "All slides seprate/w12-industrial-networks.pdf",
     "All slides seprate/w11-performance-francesca.pdf",
-    "All slides seprate/w10 riccardo-embedded-ai.pdf",
     "Week 1 (not done).md",
-    "Week 2.md",
     "Week 3.md",
     "week1/slide4.md.md",
     "Welcome.md"

@@ -1,17 +1,17 @@
 
-**Prompt for Week 4 Explanation Chat**
+**Prompt for Week 12 Explanation Chat**
 
-I will upload my **Week 4** slides from the NES course.  
+I will upload my **Week 12** slides from the NES course.  
 When explaining them, follow these rules:
 
 1. Always start each response with:  
     `![[All_slides_nes.pdf#page=X]]`  
     where **X = slide page number + OFFSET**.  
-    For this Week 4 set, the offset is **[PUT OFFSET HERE]**  
+    For this Week, the offset is 423, meaning that the first slide is found in a big document I have on slide 423, and I need the output to refer to that using the offset from the slide numbers i give you.
     (so if the offset is N, slide 1 = page N+1, slide 2 = N+2, etc.).
     
 2. After the page tag, write exactly:  
-    **Week 4 Slide [slide number] – [title of the slide]**
+    **Week 12 Slide [slide number] – [title of the slide]**
     
 3. Provide **only notes**, nothing else:
     
@@ -31,9 +31,9 @@ When explaining them, follow these rules:
     
     - Explain clearly and concretely
         
-    - Connect concepts to embedded systems practice
+    - Connect concepts to networked embedded systems practice
         
     - Emphasize things that are likely exam-relevant
         
 
-After I upload the slides, start on **slide 1 of Week 4** using this scheme.
+After I upload the slides, start on the first slide with content using this scheme.
