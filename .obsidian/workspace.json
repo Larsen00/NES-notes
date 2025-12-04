@@ -34,6 +34,22 @@
               "icon": "lucide-file",
               "title": "Week 3"
             }
+          },
+          {
+            "id": "0e0332d067dd5c21",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "All_slides_nes.pdf",
+                "page": 109,
+                "left": -4,
+                "top": 539,
+                "zoom": 1.015572105619499
+              },
+              "icon": "lucide-file-text",
+              "title": "All_slides_nes"
+            }
           }
         ],
         "currentTab": 1
@@ -197,18 +213,28 @@
       "pdf-plus:PDF++: Toggle auto-copy": false,
       "pdf-plus:PDF++: Toggle auto-focus": false,
       "pdf-plus:PDF++: Toggle auto-paste": false,
-      "omnisearch:Omnisearch": false
+      "omnisearch:Omnisearch": false,
+      "obsidian-git:Open Git source control": false
     }
   },
   "active": "42780fb369a6e708",
   "lastOpenFiles": [
-    "Week 2.md",
+    "All slides seprate/w11-performance-francesca.pdf",
+    "All slides seprate/w10 riccardo-embedded-ai.pdf",
+    "All slides seprate/w9-time-sync.pdf",
+    "All slides seprate/w8-wireless-nes.pdf",
+    "All slides seprate/W7_Wired_Networked_Embedded_Systems_Opsummering_DK.pdf",
+    "All slides seprate/w5-serial-communication_251006_184819.pdf",
+    "All slides seprate/w4-embedded-software - Copy_250925_143639.pdf",
+    "All slides seprate/w3-mcu-io - Copy.pdf",
+    "All slides seprate/w2-electronics-basics_250911_151424.pdf",
+    "All slides seprate/w1a-nes-intro.pdf",
+    "All slides seprate/w12-industrial-networks.pdf",
+    "Promt.md",
     "Week 3.md",
+    "Week 2.md",
     "Week 1 (not done).md",
-    "All_slides_nes.pdf",
-    "week2",
     "week1/slide4.md.md",
-    "week1",
     "Welcome.md"
   ]
 }
