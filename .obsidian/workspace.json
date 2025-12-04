@@ -8,51 +8,20 @@
         "type": "tabs",
         "children": [
           {
-            "id": "cd74aaf4611de840",
+            "id": "2fe4d110f68f2afd",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Week 2.md",
+                "file": "Week 4.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Week 2"
-            }
-          },
-          {
-            "id": "42780fb369a6e708",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Week 3.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Week 3"
-            }
-          },
-          {
-            "id": "0e0332d067dd5c21",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "All_slides_nes.pdf",
-                "page": 109,
-                "left": -4,
-                "top": 539,
-                "zoom": 1.015572105619499
-              },
-              "icon": "lucide-file-text",
-              "title": "All_slides_nes"
+              "title": "Week 4"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -109,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "c608193f8b91a73f",
@@ -125,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Week 2.md",
+                "file": "Week 4.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -135,7 +105,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Week 2"
+              "title": "Backlinks for Week 4"
             }
           },
           {
@@ -193,8 +163,19 @@
               "icon": "lucide-list",
               "title": "Outline"
             }
+          },
+          {
+            "id": "b4a8c56e7e17eced",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
+            }
           }
-        ]
+        ],
+        "currentTab": 5
       }
     ],
     "direction": "horizontal",
@@ -217,8 +198,17 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "42780fb369a6e708",
+  "active": "2fe4d110f68f2afd",
   "lastOpenFiles": [
+    "All_slides_nes.pdf",
+    "Week 4.md",
+    "Week 3.md",
+    "Week 1 (not done).md",
+    "Week 2.md",
+    "Week 2_updated.md",
+    "Week 3_updated.md",
+    "Ikke bekræftet 600822.crdownload",
+    "Ikke bekræftet 119362.crdownload",
     "All slides seprate/w11-performance-francesca.pdf",
     "All slides seprate/w10 riccardo-embedded-ai.pdf",
     "All slides seprate/w9-time-sync.pdf",
@@ -226,14 +216,7 @@
     "All slides seprate/W7_Wired_Networked_Embedded_Systems_Opsummering_DK.pdf",
     "All slides seprate/w5-serial-communication_251006_184819.pdf",
     "All slides seprate/w4-embedded-software - Copy_250925_143639.pdf",
-    "All slides seprate/w3-mcu-io - Copy.pdf",
-    "All slides seprate/w2-electronics-basics_250911_151424.pdf",
-    "All slides seprate/w1a-nes-intro.pdf",
-    "All slides seprate/w12-industrial-networks.pdf",
     "Promt.md",
-    "Week 3.md",
-    "Week 2.md",
-    "Week 1 (not done).md",
     "week1/slide4.md.md",
     "Welcome.md"
   ]
