@@ -1241,3 +1241,1386 @@ Deterministic networks aim not just for good _average_ performance, but for stri
 | Ultra-low loss  | Ensures reliability           |
 | Low jitter      | Ensures timing consistency    |
 | Bounded latency | Ensures worst-case guarantees |
+![[All_slides_nes.pdf#page=403]]  
+Week 11 slide 30 – Energy Efficiency
+
+This slide introduces the topic of **energy efficiency** by asking two foundational questions:
+
+---
+
+## **1. When does energy efficiency matter?**
+
+Energy efficiency becomes important in systems that:
+
+- Run on **limited energy sources** (like batteries).
+    
+- Use **energy harvesting** (solar, vibration, thermal), where energy supply is unpredictable.
+    
+- Need to operate for **long periods without maintenance**.
+    
+- Must be **environmentally friendly** (reduced power usage → lower carbon footprint).
+    
+
+---
+
+## **2. What affects energy consumption?**
+
+Energy usage depends on both:
+
+### **Hardware Factors**
+
+- Power states (active, idle, sleep).
+    
+- Efficiency of components (CPU, radio, sensors).
+    
+- Faults or inefficiencies like leakage currents.
+    
+
+### **Software Factors**
+
+- Duty cycling (how often hardware is awake).
+    
+- Algorithm complexity (affects CPU time).
+    
+- Communication patterns (radio is expensive).
+    
+- Scheduling of tasks to minimize wake-ups.
+    
+
+---
+
+## **Key Insight**
+
+Energy consumption is not just a hardware issue.  
+Software design plays a major role in determining how long an embedded device can operate on its available energy.
+
+---
+
+### **Summary Table**
+
+|Factor Type|Examples|Impact|
+|---|---|---|
+|Hardware|Power states, leakage|Sets physical limits on power usage|
+|Software|Duty cycling, algorithms|Determines how often power-hungry components run|
+![[All_slides_nes.pdf#page=404]]  
+Week 11 slide 31 – Energy Efficiency (continued)
+
+This slide gives a more structured view of _when_ energy efficiency matters and _what_ determines energy consumption.
+
+---
+
+## **When Energy Efficiency Matters**
+
+### **1. Energy-Constrained Embedded Systems**
+
+Devices powered by:
+
+- Batteries
+    
+- Energy harvesters
+    
+
+For these systems, energy efficiency is directly tied to **availability**:  
+if energy runs out, the system simply cannot operate.
+
+### **2. Green Embedded Systems**
+
+Systems designed to reduce environmental impact by lowering energy consumption.  
+This is important for:
+
+- Large-scale IoT deployments
+    
+- High-volume consumer electronics
+    
+- Sustainability-driven design requirements
+    
+
+---
+
+## **What Affects Energy Consumption?**
+
+### **Hardware Effects**
+
+- Active / idle / sleep power levels
+    
+- Hardware faults
+    
+- Efficiency of radios, sensors, memory, CPU
+    
+- Internal leakage currents
+    
+
+### **Software Effects**
+
+- **Duty cycling** (how long components stay active) is one of the strongest factors.
+    
+- Algorithm complexity → CPU time → energy.
+    
+- Communication frequency and packet size → radio energy.
+    
+- Scheduling choices → wake-up frequency.
+    
+
+---
+
+## **Key Insight**
+
+Energy consumption results from a combination of hardware limitations and software decisions.  
+Software often has _more influence_ because it controls how long hardware stays in high-power states.
+
+---
+
+### **Summary Table**
+
+|Category|Examples|Impact|
+|---|---|---|
+|Energy-Constrained Systems|Battery-powered, energy harvesting|Energy = lifetime|
+|Green Systems|Eco-focused design|Lower carbon footprint|
+|Hardware Factors|Power states, leakage, device efficiency|Baseline power usage|
+|Software Factors|Duty cycling, algorithms|Controls active-time energy|
+![[All_slides_nes.pdf#page=405]]  
+Week 11 slide 32 – Energy Consumption Basics
+
+This slide introduces the fundamental relationship between **power**, **energy**, and **time**.
+
+---
+
+## **Key Formula**
+
+Energy is the time-integral of power:
+
+$$  
+E = P \times T  
+$$
+
+Where:
+
+- **E** = energy (Joules)
+    
+- **P** = power (Watts)
+    
+- **T** = time (seconds)
+    
+
+---
+
+## **Meaning**
+
+- Power tells you **how fast** energy is being consumed.
+    
+- Energy tells you **how much total** was consumed over a period.
+    
+
+Example interpretations:
+
+- A device using 1 W for 10 seconds consumes:  
+    $$E = 1 \times 10 = 10\ \text{Joules}$$
+    
+- A device using 100 mW for 1 hour consumes:  
+    $$E = 0.1\ \text{W} \times 3600\ \text{s} = 360\ \text{Joules}$$
+    
+
+---
+
+## **Key Insight**
+
+Understanding energy consumption always starts with this relationship.  
+Even complex measurements (like varying power levels over time) ultimately rely on integrating this same equation.
+
+---
+
+### **Summary Table**
+
+|Concept|Meaning|
+|---|---|
+|Power (P)|Rate of energy consumption|
+|Time (T)|Duration of operation|
+|Energy (E)|Total consumed over time → $$E = P \cdot T$$|
+
+![[All_slides_nes.pdf#page=406]]  
+Week 11 slide 33 – Variable Consumption
+
+This slide explains that energy consumption is not always constant—systems often switch between different power states, and energy must be computed by integrating power over time.
+
+---
+
+## **Key Idea: Power Changes With System State**
+
+Example:  
+A LED that blinks every second.
+
+- When the LED is **on**, power is higher.
+    
+- When the LED is **off**, power is near zero.
+    
+- Total energy use depends on how long the system stays in each state.
+    
+
+---
+
+## **Energy as a Time Integral**
+
+Even when power varies, energy is still computed as:
+
+$$  
+E = \int P(t), dt  
+$$
+
+This means:
+
+- You accumulate power consumption over time.
+    
+- The more time spent in high-power states, the greater the total energy.
+    
+
+---
+
+## **Why This Matters**
+
+Many embedded systems:
+
+- Sleep most of the time
+    
+- Wake briefly to perform short actions
+    
+- Use radios that have huge differences between sleep and active power
+    
+
+Therefore, understanding **power vs. time** is essential for predicting battery life.
+
+---
+
+### **Summary Table**
+
+|Concept|Meaning|
+|---|---|
+|Variable power|Power changes based on state (LED on/off, radio on/off)|
+|Energy integral|$$E = \int P(t), dt$$|
+|Insight|Time spent in high-power states dominates total energy|
+
+![[All_slides_nes.pdf#page=407]]  
+Week 11 slide 34 – Quiz (Energy Efficiency Comparison)
+
+This slide presents a question comparing the energy efficiency of **two embedded systems** that perform the same functionality but have very different power characteristics.
+
+---
+
+## **Given**
+
+### **System A**
+
+- Idle power: **1 µW**
+    
+- Active power: **100 mW**
+    
+
+### **System B**
+
+- Idle power: **100 µW**
+    
+- Active power: **10 mW**
+    
+
+---
+
+## **Question**
+
+**Which system is more energy efficient?**
+
+At this point, the slide does **not** give the answer—it sets up the idea that efficiency depends on how long the system spends in each state.
+
+---
+
+## **Key Insight**
+
+You _cannot_ say which system is more efficient without knowing the **duty cycle** (how much time is spent active vs idle).
+
+- If the system is active **very rarely**, idle power dominates → System A (1 µW idle) looks better.
+    
+- If the system is active **very often**, active power dominates → System B (10 mW active) looks better.
+    
+
+This prepares for the next slide.
+
+---
+
+### **Summary Table**
+
+|System|Idle Power|Active Power|Better When…|
+|---|---|---|---|
+|A|1 µW|100 mW|Low duty cycle (mostly idle)|
+|B|100 µW|10 mW|High duty cycle (often active)|
+
+![[All_slides_nes.pdf#page=408]]  
+Week 11 slide 35 – Quiz (Answer)
+
+This slide provides the conclusion to the energy efficiency question from the previous slide.
+
+---
+
+## **Answer: It Depends on the Duty Cycle**
+
+Neither system (A or B) is universally more energy efficient.
+
+### **Why?**
+
+Energy consumption over time depends on how long the system stays in active vs. idle mode.
+
+- If the system is **active rarely** → idle power dominates
+    
+    - System **A** is better because it has extremely low idle power (1 µW).
+        
+- If the system is **active frequently** → active power dominates
+    
+    - System **B** is better because its active power (10 mW) is much lower than A’s (100 mW).
+        
+
+---
+
+## **Key Insight**
+
+Energy efficiency is not determined by power levels alone but by:
+
+$$  
+\text{How long the device spends in each power state}  
+$$
+
+This leads directly into the next topic: long-term average power.
+
+---
+
+### **Summary Table**
+
+|Condition|More Efficient System|Reason|
+|---|---|---|
+|Low duty cycle (mostly idle)|**A**|Lower idle power|
+|High duty cycle (mostly active)|**B**|Lower active power|
+![[All_slides_nes.pdf#page=409]]  
+Week 11 slide 36 – Long-Term Average Power Consumption
+
+This slide introduces a formula for computing **average power** over long periods when a system alternates between active and idle states.
+
+---
+
+## **Duty Cycle (DC)**
+
+Duty cycle represents the **fraction of time** the system spends in active mode.
+
+Example:  
+A 1% duty cycle means:
+
+- 1% of the time → **active**
+    
+- 99% of the time → **idle**
+    
+
+---
+
+## **Average Power Formula**
+
+If:
+
+- $$P_{ON}$$ = power in active mode
+    
+- $$P_{IDLE}$$ = power in idle mode
+    
+- $$DC$$ = duty cycle (between 0 and 1)
+    
+
+Then average power is:
+
+$$  
+P_{AVG} = P_{ON} \cdot DC + P_{IDLE} \cdot (1 - DC)  
+$$
+
+---
+
+## **Interpretation**
+
+- When **DC is high**, active power dominates → high $$P_{AVG}$$
+    
+- When **DC is low**, idle power dominates → $$P_{AVG}$$ depends mostly on $$P_{IDLE}$$
+    
+
+This explains why a device that rarely wakes up benefits more from low idle power than low active power.
+
+---
+
+### **Graph (from slide)**
+
+The plot visualizes how $$P_{AVG}$$ transitions from being dominated by $$P_{IDLE}$$ at low duty cycles to being dominated by $$P_{ON}$$ at high duty cycles.
+
+---
+
+## **Summary Table**
+
+|Duty Cycle|Dominant Power Term|Meaning|
+|---|---|---|
+|Low DC|$$P_{IDLE}$$|Device mostly sleeps|
+|High DC|$$P_{ON}$$|Device often active|
+![[All_slides_nes.pdf#page=410]]  
+Week 11 slide 37 – How to Measure Energy Consumption?
+
+This slide explains how to measure the **actual energy usage** of an embedded system by measuring its **current draw over time**.
+
+---
+
+## **Key Electrical Relationships**
+
+1. Power:  
+    $$  
+    P = V \times I  
+    $$
+    
+2. Energy over time:  
+    $$  
+    E = V \times I \times T  
+    $$
+    
+
+Assumption:
+
+- The supply voltage **V** is constant (e.g., battery voltage).
+    
+
+---
+
+## **How to Measure Current**
+
+To find energy, you need the current as a function of time:
+
+$$  
+I(t)  
+$$
+
+To get this, you measure the voltage drop across a **shunt resistor** using an oscilloscope.
+
+---
+
+## **Measurement Setup**
+
+1. Place a small resistor **in series** with the device.
+    
+2. Measure the voltage across it:
+    
+
+$$  
+V_R(t)  
+$$
+
+3. Compute current as:
+    
+
+$$  
+I(t) = \frac{V_R(t)}{R}  
+$$
+
+4. Integrate over time to get energy:
+    
+
+$$  
+E = V_S \int I(t), dt  
+$$
+
+where $$V_S$$ is the supply voltage.
+
+---
+
+## **Key Insight**
+
+To measure energy accurately, you need:
+
+- A resistor
+    
+- An oscilloscope
+    
+- Knowledge of the resistor value
+    
+- The assumption (or measurement) of supply voltage
+    
+
+---
+
+### **Summary Table**
+
+|Quantity|Symbol|How It’s Obtained|
+|---|---|---|
+|Supply voltage|$$V_S$$|Battery or power supply|
+|Voltage over resistor|$$V_R(t)$$|Oscilloscope|
+|Current|$$I(t) = V_R(t)/R$$|Computed|
+|Energy|$$E = V_S \int I(t), dt$$|Integration over time|
+
+![[All_slides_nes.pdf#page=411]]  
+Week 11 slide 38 – High-Side Shunt Resistor
+
+This slide explains the **high-side shunt** method for measuring current by placing a resistor in series with the supply line.
+
+---
+
+## **Core Principle**
+
+A resistor is placed in series with the power supply.  
+You measure the voltage drop across it:
+
+$$  
+I(t) = \frac{V_R(t)}{R}  
+$$
+
+Where:
+
+- $$V_R(t)$$ is the measured voltage across the resistor
+    
+- $$R$$ is the resistor value
+    
+
+---
+
+## **Question: How large should R be?**
+
+The slide sets up this question but does not yet answer it (the next slide does).  
+Choosing R is a trade-off:
+
+- If **R is too large**, the resistor drops too much voltage → the device may not get enough supply voltage.
+    
+- If **R is too small**, the voltage drop is tiny → difficult to measure accurately, especially for small currents.
+    
+
+---
+
+## **Measurement Context**
+
+This method is “high-side” because the resistor sits on the **positive supply rail**, meaning:
+
+- The measurement does _not_ disturb ground reference.
+    
+- But it requires differential measurement if the tool shares ground with the device.
+    
+
+---
+
+## **Key Insight**
+
+The accuracy and safety of current measurement depend heavily on choosing an appropriate resistor value.
+
+---
+
+### **Summary Table**
+
+|Quantity|Meaning|
+|---|---|
+|$$V_R(t)$$|Voltage across shunt resistor|
+|$$R$$|Shunt resistor value|
+|$$I(t)$$|Current computed as $$V_R(t)/R$$|
+|Design trade-off|Large R → big voltage drop; small R → hard to measure|
+
+![[All_slides_nes.pdf#page=412]]  
+Week 11 slide 39 – High-Side Shunt Resistor (Choosing R)
+
+This slide continues the previous one and explains **how to choose the correct shunt resistor value** using a concrete example.
+
+---
+
+## **Given Example**
+
+- Supply voltage:  
+    $$V_S = 3.3\ \text{V}$$
+    
+- The IC requires:  
+    $$V_{IN} = 3\text{–}5\ \text{V}$$  
+    (so the voltage drop across the resistor must stay small)
+    
+- Current draw ranges:
+    
+    - Idle: $$10\ \mu\text{A}$$
+        
+    - Active: $$10\ \text{mA}$$
+        
+
+---
+
+## **Case 1: Resistor Too Large (R = 100 Ω)**
+
+Maximum voltage drop:
+
+$$  
+V_R = 10\ \text{mA} \times 100\ \Omega = 1\ \text{V}  
+$$
+
+This reduces the input voltage:
+
+$$  
+V_{IN} = 3.3\ \text{V} - 1\ \text{V} = 2.3\ \text{V}  
+$$
+
+**Problem:**  
+2.3 V is _below_ the required 3–5 V → the circuit may fail.
+
+---
+
+## **Case 2: Resistor Too Small (R = 1 Ω)**
+
+- Max voltage drop at 10 mA:
+    
+
+$$  
+V_R = 10\ \text{mA} \times 1\ \Omega = 10\ \text{mV}  
+$$
+
+- This yields:
+    
+
+$$  
+V_{IN} = 3.29\ \text{V}  
+$$
+
+→ **Safe**, the device still gets enough voltage.
+
+- Minimum voltage drop at 10 µA:
+    
+
+$$  
+V_R = 10\ \mu\text{A} \times 1\ \Omega = 10\ \mu\text{V}  
+$$
+
+**Problem:**  
+Very small voltage → hard to measure accurately.
+
+---
+
+## **Key Insight**
+
+Choosing R is a balancing act:
+
+- **Large R** → large, easy-to-measure voltage drop, but risks disrupting the circuit.
+    
+- **Small R** → safe for the circuit, but the voltage drop may be below measurement resolution.
+    
+
+---
+
+### **Summary Table**
+
+|R Value|Pros|Cons|
+|---|---|---|
+|Large R|Easy to measure voltage drop|Voltage drop may break the system|
+|Small R|Safe for circuit operation|Very small voltages → hard to measure|
+![[All_slides_nes.pdf#page=413]]  
+Week 11 slide 40 – Resistor Tolerance
+
+This slide explains how **resistor tolerance** affects current measurement accuracy when using a shunt resistor.
+
+---
+
+## **Formula Reminder**
+
+Current is computed as:
+
+$$  
+I(t) = \frac{V_R(t)}{R}  
+$$
+
+But this only works correctly if you know **R** precisely.
+
+---
+
+## **What Is Resistor Tolerance?**
+
+Tolerance specifies how much the **actual** resistance may deviate from the **nominal** value.
+
+Example:  
+A 10 Ω resistor with:
+
+- **10% tolerance** → actual value between 9 Ω and 11 Ω
+    
+- **1% tolerance** → actual value between 9.9 Ω and 10.1 Ω
+    
+
+---
+
+## **Impact on Current Measurement**
+
+### **Example Using 10 mV Voltage Drop (V_R = 10 mV)**
+
+### **Case 1: 10 Ω Resistor, 10% Tolerance**
+
+Actual R is between 9 and 11 Ω.
+
+Current estimates:
+
+- Minimum current:
+    
+
+$$  
+I_{\min} = \frac{10\ \text{mV}}{11\ \Omega} \approx 0.91\ \text{mA}  
+$$
+
+- Maximum current:
+    
+
+$$  
+I_{\max} = \frac{10\ \text{mV}}{9\ \Omega} \approx 1.11\ \text{mA}  
+$$
+
+→ **Large uncertainty** (± ~10%).
+
+---
+
+### **Case 2: 10 Ω Resistor, 1% Tolerance**
+
+Actual R between 9.9 and 10.1 Ω.
+
+- Minimum current:
+    
+
+$$  
+\frac{10\ \text{mV}}{10.1\ \Omega} \approx 0.99\ \text{mA}  
+$$
+
+- Maximum current:
+    
+
+$$  
+\frac{10\ \text{mV}}{9.9\ \Omega} \approx 1.01\ \text{mA}  
+$$
+
+→ **Much smaller error** (± ~1%).
+
+---
+
+## **Key Insight**
+
+To obtain accurate current measurements:
+
+- Use **low-tolerance resistors**  
+    **or**
+    
+- Measure the actual resistance with a precise meter
+    
+
+Otherwise, current calculation error can be large.
+
+---
+
+### **Summary Table**
+
+|Tolerance|Possible R Range|Measurement Accuracy|
+|---|---|---|
+|10%|9–11 Ω|Large current error|
+|1%|9.9–10.1 Ω|Small current error|
+![[All_slides_nes.pdf#page=414]]  
+Week 11 slide 41 – Calculating the Energy
+
+This slide explains how an oscilloscope converts continuous current measurements into a **digital approximation** of the energy consumed.
+
+---
+
+## **Sampling Process**
+
+An oscilloscope samples the signal at a fixed frequency:
+
+$$  
+f = \frac{1}{\tau}  
+$$
+
+where:
+
+- $$f$$ = sampling frequency
+    
+- $$\tau$$ = time between samples
+    
+
+---
+
+## **Energy Approximation**
+
+Energy is computed by summing the energy of many small rectangles:
+
+$$  
+E \approx V_S \sum_{i=0}^{n} \frac{V_{R,i}}{R} \cdot \tau  
+$$
+
+Where:
+
+- $$V_S$$ = supply voltage
+    
+- $$V_{R,i}$$ = measured shunt resistor voltage at sample _i_
+    
+- $$R$$ = shunt resistor value
+    
+- $$\tau$$ = sampling period
+    
+- $$\frac{V_{R,i}}{R}$$ = current at sample _i_
+    
+
+This is a discrete approximation of the integral:
+
+$$  
+E = V_S \int I(t), dt  
+$$
+
+---
+
+## **Interpretation**
+
+The oscilloscope:
+
+1. Measures voltage across the resistor at many time points.
+    
+2. Converts each measurement into a current.
+    
+3. Multiplies by the sampling interval.
+    
+4. Sums all contributions to obtain total energy.
+    
+
+More samples ⇒ more accurate energy estimation.
+
+---
+
+### **Summary Table**
+
+|Symbol|Meaning|
+|---|---|
+|$$f$$|Sampling frequency|
+|$$\tau$$|Sampling interval|
+|$$V_{R,i}$$|Voltage sample across resistor|
+|$$\frac{V_{R,i}}{R}$$|Current sample|
+|$$E$$|Sum of all $$I \cdot V_S \cdot \tau$$|
+![[All_slides_nes.pdf#page=415]]  
+Week 11 slide 42 – Low-Side Shunt Resistor
+
+This slide compares **high-side** and **low-side** current measurement and explains why low-side measurement is often simpler.
+
+---
+
+## **High-Side Measurement (recap)**
+
+- Resistor placed on the **positive (Vcc) side** of the circuit.
+    
+- Requires **differential measurement**, because the oscilloscope must measure voltage between two non-ground points.
+    
+- Some oscilloscopes share ground with the DUT, which can cause short circuits.
+    
+
+---
+
+## **Low-Side Shunt Measurement**
+
+### **Setup**
+
+- The shunt resistor is placed between the **device ground** and the **actual ground**.
+    
+- Voltage is measured _relative to ground_, so a **single-ended probe** can be used.
+    
+
+### **Advantages**
+
+- Much simpler measurement: only one oscilloscope channel needed.
+    
+- No risk of shorting the device’s supply through the measurement tool.
+    
+- Works with inexpensive equipment.
+    
+
+### **Caveats**
+
+- Can introduce a small offset in device ground (ground lift).
+    
+- Usually acceptable but must be considered in sensitive analog circuits.
+    
+
+---
+
+## **Key Insight**
+
+Low-side shunt measurement is **easier and safer**, especially when using standard oscilloscopes that reference ground internally.
+
+---
+
+### **Summary Table**
+
+|Method|Resistor Placement|Pros|Cons|
+|---|---|---|---|
+|High-side|On Vcc line|Does not disturb ground reference|Requires differential probes|
+|Low-side|On ground line|Simple, safe, single-ended measurement|Slight ground lift| 
+![[All_slides_nes.pdf#page=416]]  
+Week 11 slide 43 – Measuring the Supply Voltage
+
+This slide explains why assuming a **constant supply voltage** can cause errors in energy measurements, and how to correct for it.
+
+---
+
+## **Why Supply Voltage Is _Not_ Actually Constant**
+
+Even though many analyses assume:
+
+$$  
+V_S = \text{constant}  
+$$
+
+in reality the voltage varies because of:
+
+1. **Battery internal resistance**
+    
+    - As current increases, voltage drops temporarily.
+        
+2. **Power supply noise**
+    
+    - AC→DC conversion introduces ripple.
+        
+3. **Voltage drop across the shunt resistor**
+    
+    - Measuring current changes the actual supply seen by the device.
+        
+
+All these variations affect **accuracy** if you assume a fixed voltage.
+
+---
+
+## **How to Measure Accurately**
+
+To compute energy more precisely, measure:
+
+- The instantaneous supply voltage: $$V_{IN,i}$$
+    
+- The shunt voltage drop: $$V_{R,i}$$
+    
+- The resistor value: $$R$$
+    
+
+Then energy becomes:
+
+$$  
+E = \sum_{i=0}^{n} \frac{V_{IN,i}, V_{R,i}}{R} \cdot \tau  
+$$
+
+Where:
+
+- $$\tau$$ is the sampling interval
+    
+- $$\frac{V_{R,i}}{R}$$ is the current at sample _i_
+    
+
+This captures variations in both voltage and current.
+
+---
+
+## **Why Synchronization Matters**
+
+- Measurements of $$V_{IN}$$ and $$V_R$$ must be **time-aligned**.
+    
+- Otherwise, current samples might be multiplied by the _wrong_ voltage samples, producing incorrect energy estimates.
+    
+
+---
+
+### **Summary Table**
+
+|Issue|Effect|
+|---|---|
+|Battery resistance|Voltage sag under load|
+|Noise|Rapid fluctuations in supply|
+|Shunt voltage drop|Reduces actual device voltage|
+|Fix|Measure both $$V_{IN}$$ and $$V_R$$ synchronously|
+![[All_slides_nes.pdf#page=417]]  
+Week 11 slide 44 – Power Measurement Instruments
+
+This slide describes professional instruments used for **precise power and energy measurements** in embedded systems.
+
+---
+
+## **Why Use Specialized Instruments?**
+
+Compared to shunt + oscilloscope setups, these instruments offer:
+
+- **Higher accuracy**
+    
+- **Greater dynamic range** (can measure tiny µA currents and large mA spikes)
+    
+- **Cleaner signals**
+    
+- **Automated data collection**
+    
+
+---
+
+## **Types of Power Measurement Instruments**
+
+### **1. Power Analyzers**
+
+- Measure **voltage and current simultaneously**.
+    
+- Can automatically **switch measurement ranges** to handle both low and high currents.
+    
+- Ideal for detailed consumption profiling.
+    
+
+---
+
+### **2. Source and Measurement Units (SMUs)**
+
+- Provide power _and_ measure it at the same time.
+    
+- Very clean, low-noise power supply.
+    
+- Excellent for characterizing devices under controlled power conditions.
+    
+
+---
+
+### **3. Current Probes**
+
+- Non-invasive: they **clamp around a wire** rather than inserting a resistor.
+    
+- Measure the **magnetic field** generated by current.
+    
+- Allow measurement without modifying the circuit.
+    
+
+---
+
+## **Key Insight**
+
+These instruments are powerful but expensive.  
+They are ideal for lab environments where precision matters but often impractical for large-scale or field deployments.
+
+---
+
+### **Summary Table**
+
+|Instrument|Strengths|Typical Use|
+|---|---|---|
+|Power Analyzer|High precision, wide range, simultaneous V/I|Lab profiling|
+|SMU|Clean power + measurement|Device characterization|
+|Current Probe|Non-invasive, easy to attach|Quick diagnostics|
+
+![[All_slides_nes.pdf#page=418]]  
+Week 11 slide 45 – Power Measurements in the Wild
+
+This slide highlights the **practical challenges** of performing power measurements outside of a controlled laboratory environment.
+
+---
+
+## **Why Lab Instruments Don’t Scale**
+
+Professional measurement tools (power analyzers, SMUs, scopes):
+
+- Are **too expensive** to deploy on many devices
+    
+- Are **too bulky** to attach to embedded systems in real-world scenarios
+    
+- Are **too invasive**, requiring wires or probes inserted into the power path
+    
+- Consume significant power and storage themselves, making them unsuitable for long-term remote operation
+    
+
+---
+
+## **Real-World Measurement Challenges**
+
+The slide poses several key questions:
+
+1. **How can we measure a distributed system of 100 devices?**
+    
+    - Lab tools cannot be attached to all devices simultaneously.
+        
+2. **How can we measure devices deployed in public spaces?**
+    
+    - Physical access is limited, and bulky tools cannot be installed outdoors.
+        
+3. **How can we measure moving systems (e.g., smart vehicles)?**
+    
+    - Measurement tools cannot follow mobile devices seamlessly.
+        
+4. **How can we measure devices over long durations (e.g., 1 year)?**
+    
+    - Lab tools require stable power, maintenance, and generate huge data volumes.
+        
+
+---
+
+## **Key Insight**
+
+There is a major gap between **high-accuracy lab measurements** and the need for **scalable, long-term, low-overhead measurements in the field**.
+
+This motivates the need for **software-based energy estimation**, which is introduced in the following slides.
+
+---
+
+### **Summary Table**
+
+|Challenge|Why It’s a Problem|
+|---|---|
+|Cost|Instruments too expensive for large deployments|
+|Size|Too bulky for embedded devices|
+|Invasiveness|Require wiring changes, not possible in the field|
+|Mobility|Cannot follow moving systems|
+|Long-term measurement|Instruments not designed for months/years of operation|
+![[All_slides_nes.pdf#page=419]]  
+Week 11 slide 46 – Software-Based Estimation
+
+This slide introduces a **scalable but less accurate** method for estimating energy consumption using software instrumentation instead of external measurement tools.
+
+---
+
+## **Key Idea**
+
+Instead of measuring current with hardware, the MCU **counts how many timer ticks it spends in each power state**.
+
+This works because:
+
+- Each state has a **known, constant current draw**, either from measurements or the datasheet.
+    
+- Energy can be estimated by multiplying **time spent in each state** by **current of that state**.
+    
+
+---
+
+## **Assumptions**
+
+1. **Supply voltage is constant**  
+    Used for simplifying energy calculation.
+    
+2. **Each MCU/peripheral state has a constant current**  
+    Example states:
+    
+    - MCU Active
+        
+    - MCU Idle
+        
+    - MCU Standby
+        
+    - Radio TX
+        
+    - Radio RX
+        
+
+---
+
+## **Procedure**
+
+1. MCU counts clock ticks in each state during a reporting period.
+    
+2. It logs the tick counts periodically.
+    
+3. Energy is computed later using known current values.
+    
+
+---
+
+## **Example Table from Slide**
+
+Period log (simplified):
+
+|Period|MCU Active|MCU Idle|MCU Standby|Radio TX|Radio RX|
+|---|---|---|---|---|---|
+|1|1966080|32768|294912|1638400|540|
+|2|1966080|31232|296405|1638443|654|
+|3|1966080|34440|293106|1638534|434|
+
+Each row corresponds to one measurement interval.
+
+---
+
+## **Key Insight**
+
+This approach scales to:
+
+- Large deployments
+    
+- Remote or inaccessible devices
+    
+- Long-term energy monitoring
+    
+
+It trades **accuracy** for **practicality and scalability**.
+
+---
+
+### **Summary Table**
+
+|Property|Hardware Measurement|Software Estimation|
+|---|---|---|
+|Accuracy|High|Medium/Low|
+|Scalability|Low|High|
+|Invasiveness|High|None|
+|Long-term use|Difficult|Easy|
+
+![[All_slides_nes.pdf#page=420]]  
+Week 11 slide 47 – Software-Based Estimation (Energy Formula)
+
+This slide explains **how to convert tick counts into actual energy estimates** using known current values for each state.
+
+---
+
+## **Energy Calculation per Reporting Period**
+
+Each state _i_ has:
+
+- Time spent in the state (in ticks): $$t_i$$
+    
+- Current drawn in the state: $$I_i$$
+    
+- Supply voltage: $$V_S$$
+    
+
+To convert ticks into seconds:
+
+$$  
+\text{Time in seconds} = \frac{t_i}{t_s}  
+$$
+
+where:
+
+- $$t_s$$ = number of ticks per second (timer frequency)
+    
+
+---
+
+## **Energy Formula**
+
+Total energy in period _k_ is:
+
+$$  
+E_k = \sum_{i=0}^{n} \frac{t_i}{t_s} , I_i , V_S  
+$$
+
+This computes the energy consumed across all states.
+
+---
+
+## **Average Power**
+
+Power over the reporting period is simply:
+
+$$  
+P_{AVG} = \frac{E_k}{\text{Period Duration}}  
+$$
+
+Since the period duration is known, average power can be derived directly from the energy estimate.
+
+---
+
+## **Key Insight**
+
+The MCU does not measure current dynamically—it only reports _how long it stayed in each state_.
+
+Energy is obtained by:
+
+1. Converting ticks → time
+    
+2. Multiplying time × known current × supply voltage
+    
+3. Summing across all states
+    
+
+This provides a **scalable** and **lightweight** method for estimating energy in large deployments.
+
+---
+
+### **Summary Table**
+
+|Variable|Meaning|
+|---|---|
+|$$t_i$$|Tick count spent in state _i_|
+|$$t_s$$|Ticks per second|
+|$$I_i$$|Current draw of state _i_|
+|$$V_S$$|Supply voltage|
+|$$E_k$$|Estimated energy in reporting period|
+|$$P_{AVG}$$|Average power during the period|
+
+
+---
+---
+---
+Here are 5 multiple-choice questions based on the full slide set, **without answers**:
+
+---
+
+### **MCQ 1 — Reliability Measurement**
+
+When measuring reliability of a wireless link with PRR = 0.6 and allowing N retransmissions, the Packet Delivery Rate (PDR) depends on:  
+A. The number of successful transmissions only  
+B. The probability that at least one of the attempts succeeds  
+C. The average number of packets sent per second  
+D. The size of each transmitted packet
+
+---
+
+### **MCQ 2 — Delay Components**
+
+Which of the following is **not** a source of delay in network communication?  
+A. Propagation delay  
+B. Transmission delay  
+C. Temperature drift  
+D. Duty-cycle related waiting time
+
+---
+
+### **MCQ 3 — Energy Measurement**
+
+In a shunt-resistor measurement setup, choosing a resistor value that is too large primarily risks:  
+A. Producing too much noise for the oscilloscope  
+B. Lowering the supply voltage below what the device requires  
+C. Increasing the sampling frequency  
+D. Making the resistor heat up and break immediately
+
+---
+
+### **MCQ 4 — Software-Based Energy Estimation**
+
+Software-based energy estimation relies on the assumption that:  
+A. The supply voltage and current vary unpredictably  
+B. All MCU states draw constant, known currents  
+C. RTC timers are always perfectly synchronized  
+D. The radio is always active
+
+---
+
+### **MCQ 5 — Redundancy**
+
+Dissimilar redundancy is primarily used to:  
+A. Reduce hardware cost  
+B. Protect against correlated failures  
+C. Improve processing speed  
+D. Increase packet size for more accuracy
+
+---
+
+Let me know when you're ready for the answers.
+
+Here are the answers:
+
+---
+
+### **MCQ 1 — Reliability Measurement**
+
+**Answer: B** — The probability that at least one of the attempts succeeds.
+
+---
+
+### **MCQ 2 — Delay Components**
+
+**Answer: C** — Temperature drift.
+
+---
+
+### **MCQ 3 — Energy Measurement**
+
+**Answer: B** — Lowering the supply voltage below what the device requires.
+
+---
+
+### **MCQ 4 — Software-Based Energy Estimation**
+
+**Answer: B** — All MCU states draw constant, known currents.
+
+---
+
+### **MCQ 5 — Redundancy**
+
+**Answer: B** — Protect against correlated failures.
+
+---
+
+If you want, I can generate more questions or a mixed quiz.
