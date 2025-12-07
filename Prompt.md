@@ -1,17 +1,14 @@
 
-**Prompt for Week 12 Explanation Chat**
-
-I will upload my **Week 12** slides from the NES course.  
+I will upload 1 week of slides from the NES course.  
 When explaining them, follow these rules:
 
 1. Always start each response with:  
     `![[All_slides_nes.pdf#page=X]]`  
     where **X = slide page number + OFFSET**.  
-    For this Week, the offset is 423, meaning that the first slide is found in a big document I have on slide 423, and I need the output to refer to that using the offset from the slide numbers i give you.
-    (so if the offset is N, slide 1 = page N+1, slide 2 = N+2, etc.).
+    For this Week, the offset is 308, meaning that i will refer to the slide in a bigger combined document, where the first slide for the week is slide 308. When referring to the slides in the week file I give you, use the offset to match page 1 = 308, page 2 = 309, etc...
     
 2. After the page tag, write exactly:  
-    **Week 12 Slide [slide number] – [title of the slide]**
+    **Week 10 Slide [slide number] – [title of the slide]**
     
 3. Provide **only notes**, nothing else:
     
@@ -36,4 +33,4 @@ When explaining them, follow these rules:
     - Emphasize things that are likely exam-relevant
         
 
-After I upload the slides, start on the first slide with content using this scheme.
+After I upload the slides, start on the first slide with content using this scheme. Remember to only write notes for 1 slide at a time and be detailed about it. For slides such as the first that dont have any real content, just skip it but write what you have skipped.
